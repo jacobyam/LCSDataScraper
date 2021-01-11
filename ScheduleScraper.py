@@ -27,13 +27,13 @@ elements = browser.find_elements_by_xpath('//*/text()[.="{}"]/following::div'.fo
 matches = [['Blue','Red','League']]
 for e in elements:
     if(e.get_attribute('class') == 'EventDate'):
-        with open('Matchups.csv','wb') as result_file:
+        with open('C:/Users/jacob/Documents/DFSOpto/LoLModel/Schedule.csv','wb') as result_file:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerows(matches)
             browser.quit()
         exit()
     if(e.get_attribute('class') == 'EventMatch'):
         teams = e.find_elements_by_xpath('.//div[@class="team-info"]')
-        league = e.find_elements_by_xpath('.//div[@class="league"]')
-        match = [teams[0].text, teams[1].text, league[0].text]
+        league = e.find_elements_by_xpath('.//div[@class="league"]/div[@class="name"]')
+        match = [teams[0].text.upper(), teams[1].text.upper(), league[0].text]
         matches.append(match)

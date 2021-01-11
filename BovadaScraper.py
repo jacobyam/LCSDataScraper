@@ -9,7 +9,7 @@ import json
 #Am I bad at JSON or is it dumb to have to put [0] after every elements name? Its gotta be me right?
 r = requests.get('https://www.bovada.lv/services/sports/event/v2/events/A/description/esports/league-of-legends')
 deserialized = json.loads(r.text)
-allMoneyLines = [['Team','Opp','ML']]
+allMoneyLines = [['Team','Opp','BovadaML']]
 for event in deserialized[0]['events']:
     teamA = event['competitors'][0]['name']
     teamB = event['competitors'][1]['name']
@@ -27,8 +27,8 @@ for event in deserialized[0]['events']:
                 """
                 description = outcome['description']
                 opp = teamB if (description == teamA) else teamA
-                allMoneyLines.append([description,opp,outcome['price']['american']])
+                allMoneyLines.append([description.upper(),opp.upper(),outcome['price']['american']])
         break
-    with open('BovadaLines.csv','wb') as result_file:
+    with open('C:/Users/jacob/Documents/DFSOpto/LoLModel/BovadaLines.csv','wb') as result_file:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerows(allMoneyLines)
