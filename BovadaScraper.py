@@ -6,7 +6,7 @@ Created on Jan 9, 2021
 import csv
 import requests
 import json
-#Am I bad at JSON or is it dumb to have to put [0] after every elements name? Its gotta be me right?
+#Am I bad at JSON or is it dumb to have every other element be a list thats 1 long? Is it really normal to have to put [0] after everything? Its gotta be me right?
 r = requests.get('https://www.bovada.lv/services/sports/event/v2/events/A/description/esports/league-of-legends')
 deserialized = json.loads(r.text)
 allMoneyLines = [['Team','Opp','BovadaML']]
